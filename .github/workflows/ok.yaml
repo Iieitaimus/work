@@ -1,0 +1,17 @@
+name: Set Pull Request Title to Bash Variable
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  set-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set PR title to variable
+        id: set_pr_title
+        run: |
+          # echo "title=${{ github.event.pull_request.title }}"
