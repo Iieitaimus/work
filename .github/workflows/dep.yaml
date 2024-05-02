@@ -18,8 +18,9 @@ jobs:
         run: |
           git config --local user.email "$(git log --pretty='%ae' -1)"
           git config --local user.name "Dependabot[bot]"
-          git checkout ${{ github.event.pull_request.head.ref }}
-
+          #git checkout ${{ github.event.pull_request.head.ref }}
+          echo "${{ github.event.pull_request.head.ref }}"
+          
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
