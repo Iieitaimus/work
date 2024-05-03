@@ -33,10 +33,14 @@ jobs:
           extensions: mbstring, fileinfo, intl, sqlite, pdo_sqlite, zip, gd
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          printenv;
-          echo "-------------";
-          echo $GITHUB_TOKEN;
+          printenv
+          echo "-------------"
+          echo $GITHUB_TOKEN
           
       - name: Set up Nextcloud
         run: |
