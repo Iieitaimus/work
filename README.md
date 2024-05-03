@@ -5,7 +5,7 @@
 [![Design](https://contribute.design/api/shield/nextcloud/server)](https://contribute.design/nextcloud/server)
 
 **A safe home for all your data.**aaa
-a
+aa
 ![](https://raw.githubusercontent.com/nextcloud/screenshots/master/nextcloud-hub-files-25-preview.png)
 
 ## Why is this so awesome? 🤩
