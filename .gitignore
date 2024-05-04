@@ -1,0 +1,15 @@
+node_modules
+build
+modules/**/build
+modules/**/dist
+modules/**/.env
+npm-debug.log
+.env
+.DS_Store
+work
+coverage
+out
+local.json
+globalConfig.json
+.serverless
+dist
