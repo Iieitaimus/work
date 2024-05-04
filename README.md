@@ -1,89 +1,193 @@
-# Nextcloud Server ☁
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/server/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/server/?branch=master)
-[![codecov](https://codecov.io/gh/nextcloud/server/branch/master/graph/badge.svg)](https://codecov.io/gh/nextcloud/server)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/209/badge)](https://bestpractices.coreinfrastructure.org/projects/209)
-[![Design](https://contribute.design/api/shield/nextcloud/server)](https://contribute.design/nextcloud/server)
+# Docs Worker Pool
 
-**A safe home for all your data.**
+As part of the Docs Tools Next Generation Project, the Docs Worker Pool seeks to make the build process for developers  
+both easier and more scalable for developers.
 
-![](https://raw.githubusercontent.com/nextcloud/screenshots/master/nextcloud-hub-files-25-preview.png)
+The Docs Worker Pool operates on ECS Fargate. The serverless framework and cloudformation are used to automate
+infrastructure provisioning and management. Going forward, any new buckets should be specified in
+`infrastructure/ecs-main/buckets.yml`
 
-## Why is this so awesome? 🤩
+For specific documentation on the Enhanced Autobuilder, Please visit the [cdk-infra/README.md](cdk-infra/README.md) file.
 
-* 📁 **Access your Data** You can store your files, contacts, calendars, and more on a server of your choosing.
-* 🔄 **Sync your Data** You keep your files, contacts, calendars, and more synchronized amongst your devices.
-* 🙌 **Share your Data** …by giving others access to the stuff you want them to see or to collaborate with.
-* 🚀 **Expandable with hundreds of Apps** ...like [Calendar](https://github.com/nextcloud/calendar), [Contacts](https://github.com/nextcloud/contacts), [Mail](https://github.com/nextcloud/mail), [Video Chat](https://github.com/nextcloud/spreed) and all those you can discover in our [App Store](https://apps.nextcloud.com)
-* 🔒 **Security** with our encryption mechanisms, [HackerOne bounty program](https://hackerone.com/nextcloud) and two-factor authentication.
+## To Add new properties
 
-Do you want to learn more about how you can use Nextcloud to access, share, and protect your files, calendars, contacts, communication & more at home and in your organization? [**Learn about all our Features**](https://nextcloud.com/athome/).
+All our properties are managed in parameter store and pulled by serverless framework during deploy time and pushed into the Task environment as part of task definition.
 
-## Get your Nextcloud 🚚
+To add a new property:
 
-- ☑️ [**Simply sign up**](https://nextcloud.com/signup/) at one of our providers either through our website or through the apps directly.
-- 🖥 [**Install** a server by yourself](https://nextcloud.com/install/#instructions-server) on your hardware or by using one of our ready-to-use **appliances**
-- 📦 Buy one of the [awesome **devices** coming with a preinstalled Nextcloud](https://nextcloud.com/devices/)
-- 🏢 Find a [service **provider**](https://nextcloud.com/providers/) who hosts Nextcloud for you or your company
+- Add property to parameter store for all environments (`stg`/`prd`) by following the convention as other properties
+- Go to `infrastructure/ecs-main/serverless.yml` `custom` section
+- Define the variable pointing to the right parameter store path
+- Go to `infrastructure/ecs-main/ecs-service.yml` `TaskDefinition` section
+- Add the new property to the `ContainerDefinitions`/`Environment` section
 
-Enterprise? Public Sector or Education user? You may want to have a look into [**Nextcloud Enterprise**](https://nextcloud.com/enterprise/) provided by Nextcloud GmbH.
+## Debug the Autobuilder for Local Testing
 
-## Get in touch 💬
+### Setting up
 
-* [📋 Forum](https://help.nextcloud.com)
-* [👥 Facebook](https://www.facebook.com/nextclouders)
-* [🐣 Twitter](https://twitter.com/Nextclouders)
-* [🐘 Mastodon](https://mastodon.xyz/@nextcloud)
+To debug the Autobuilder for local testing, you first need to ensure the following has been done:
 
-You can also [get support for Nextcloud](https://nextcloud.com/support)!
+1. Docker is running
+2. AWS cli is installed and configured
+3. The `~/.aws/credentials` file contains unexpired credentials for the `default` profile
 
+If you do not have the AWS cli installed, install and configure it in your home directory:
 
-## Join the team 👪
+`brew install awscli`
 
-There are many ways to contribute, of which development is only one! Find out [how to get involved](https://nextcloud.com/contribute/), including as a translator, designer, tester, helping others, and much more! 😍
+`aws configure`
 
+You will be prompted to enter values for several fields, populate at least one of them(it doesn't matter which or what it is populated with, it will be changed). After this, you should have and be able to access a file with the path `~/.aws/credentials`.
 
-### Development setup 👩‍💻
+For retrieving correct credentials, head to AWS console, and under `Docs Platform`, click on `Command line or programmatic access`.
+![AWS console](images/aws-console-admin.png)
 
-1. 🚀 [Set up your local development environment](https://docs.nextcloud.com/server/latest/developer_manual/getting_started/devenv.html)
-2. 🐛 [Pick a good first issue](https://github.com/nextcloud/server/labels/good%20first%20issue)
-3. 👩‍🔧 Create a branch and make your changes. Remember to sign off your commits using `git commit -sm "Your commit message"`
-4. ⬆ Create a [pull request](https://opensource.guide/how-to-contribute/#opening-a-pull-request) and `@mention` the people from the issue to review
-5. 👍 Fix things that come up during a review
-6. 🎉 Wait for it to get merged!
+Copy the value in option 2, `Manually add a profile to your AWS credentials file (Short-term credentials)`.
 
-Third-party components are handled as git submodules which have to be initialized first. So aside from the regular git checkout invoking `git submodule update --init` or a similar command is needed, for details see Git documentation.
+![Alt text](images/aws-credentials.png)
 
-Several apps that are included by default in regular releases such as [First run wizard](https://github.com/nextcloud/firstrunwizard) or [Activity](https://github.com/nextcloud/activity) are missing in `master` and have to be installed manually by cloning them into the `apps` subfolder.
+Paste this value in `~/.aws/credentials`, and replace the randomly generated profile (which looks something like `[123456789_AdministratorAccess]`) with `[default]`.
+You should now have the correct credentials to run the debugger.
 
-Otherwise, git checkouts can be handled the same as release archives, by using the `stable*` branches. Note they should never be used on production systems.
+_**NOTE: credentials expire pretty quickly. Not sure how exactly how long they last for, but in my experience they expire in approximately 30 minutes.**_
 
+You should now be all set to run the debugger command:
 
-### Tools we use 🛠
+`npm run debug`
 
-- [👀 BrowserStack](https://browserstack.com) for cross-browser testing
-- [🌊 WAVE](https://wave.webaim.org/extension/) for accessibility testing
-- [🚨 Lighthouse](https://developers.google.com/web/tools/lighthouse/) for testing performance, accessibility, and more
+To view all of the options for the command, you can run:
 
-#### Helpful bots at GitHub :robot:
+`npm run debug -- --help`
 
-- Comment on a pull request with `/update-3rdparty` to update the 3rd party submodule. It will update to the last commit of the 3rd party branch named like the PR target.
+Here is an example of running the local debugger for `cloud-docs`:
 
-## Contribution guidelines 📜
+`npm run debug -- -o 10gen -n cloud-docs`
 
-All contributions to this repository from June 16, 2016, and onward are considered to be
-licensed under the AGPLv3 or any later version.
+Here is an example of running the local debugger for `docs-monorepo/docs-landing` on branch `groot`:
 
-Nextcloud doesn't require a CLA (Contributor License Agreement).
-The copyright belongs to all the individual contributors. Therefore we recommend
-that every contributor adds the following line to the header of a file if they
-changed it substantially:
+`npm run debug -- -o 10gen -n docs-monorepo -d docs-landing -b groot`
+
+By default, the environment that is used for the local Autobuilder is `stg`.
+
+### Debugger Behavior
+
+When the command is run, there are several steps that occur before the Autobuilder begins:
+
+1. Environment variables and other information are pulled from Parameter Store
+2. The GitHub repository is queried for data to create the job
+3. The container is built
+   - NOTE: If you have not run the debug command before, the build will take a substantial amount of time (approximately 10-15 minutes).
+     Subsequent builds will be much shorter, especially if the changes are just code changes. If just a code change is made after the initial build, it should only take a few seconds for the build to complete and the container to run. Changes such as updating the version of the Snooty Parser, or the Redoc CLI will cause the builds to take much longer, but these happen much less frequently. The majority of the build should be on the order of a few seconds.
+4. The data from step 2 is then added as a record in the `pool_test.queue`.
+5. The container is then run, and waits for the user to connect to it via the VSCode debugger.
+
+Once the container starts successfully, you should see something like the following message:
+
+`Debugger listening on ws://0.0.0.0:9229/....`
+
+To connect, click on the debug tab on the left side of your VSCode editor. Make sure the dropdown to the right of the green play button is set to the `Docker: Attach to Autobuilder` configuration. Press the green play button, and you will attach to the container.
+
+### Troubleshooting
+
+The most frequent cause of build failures will be related to expired AWS credentials, or not having Docker running. Also, if you haven't run `npm ci` in a while, you will need to do so as a new dependency was added to run the command.
+
+Occasionally, errors may occur inexplicably, and the error messages may seem unrelated to any change made. Oftentimes, running the following commands can resolve these sporadic issues:
+
+```sh
+docker image prune
+docker container prune
+```
+
+Also, another potential error could be due to the Dockerfile.local not being updated. If you are not seeing changes that are occurring in the Autobuilder in another environment, this may be why. For example, the Dockerfile.local could be using an older version of the Snooty Parser.
+
+![Alt text](images/vsode-debugger.png)
+
+By default, the container will break at the first line of code, which will be in a file called `bind.js`. Press the fast-forward button to continue the execution. You are also able to add other breakpoints to stop the application. Once the application is complete, press `CTRL + C` for the terminal to exit out of the connection to the container.
+
+If you receive `CredentialsProviderError: Could not load credentials from any providers`, make sure that there is no env `AWS_PROFILE` defined as a different profile anywhere (such as in the global `~/.zshrc` file). Otherwise, ensure that `AWS_PROFILE` matches the same profile defined in `~/.aws/credentials`.
+
+## Run Tests
 
 ```
-@copyright Copyright (c) <year>, <your name> (<your email address>)
+cd worker
+npm install --dev
+npm test  // runs ~ jest --detectOpenHandles --coverage
 ```
 
-Please read the [Code of Conduct](https://nextcloud.com/community/code-of-conduct/). This document offers some guidance to ensure Nextcloud participants can cooperate effectively in a positive and inspiring atmosphere and to explain how together we can strengthen and support each other.
+## Run Linter
 
-Please review the [guidelines for contributing](.github/CONTRIBUTING.md) to this repository.
+```
+cd worker
+npm install --dev
+npm run lint
+```
 
-More information on how to contribute: [https://nextcloud.com/contribute/](https://nextcloud.com/contribute/)
+See the [spec doc](https://docs.google.com/document/d/1XZOuuGmozcLQRSDitx0UWhZzJaS4opR1JVwZqDp-N4g/edit?usp=sharing) for more details.
+
+## Branches
+
+Development in this repository can be done via forks or branches. Currently, we support a `main` branch and `meta` branch. In general, the development workflow is to open pull requests against `main`, and to test `main` prior to creating new tags for a release.
+
+In general, the git workflow within this repository loosely follows https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow .
+
+### Meta
+
+`meta` contains various makefiles and .yaml files used for configuration.
+Changes or additions to/of makefiles and .yaml for publishing purposes should be performed against this branch.
+There is no general requirement to keep `meta` up to date with `main` or `integration`.
+
+### Main
+
+`main` is treated as a running pre-production feature branch. Changes should not go into main until properly tested for regressions in an acceptance environment. It is an expectation that hotfixes may have to occur on occasion - on such an occasion, a feature branch should be made from the commit hash of the last release tag, and not from the head of main. Main may contain changes that have yet to be fully tested for a production release.
+
+### Release Tags
+
+Each release tag represents a presumptive stable release - with the most recent release tag representing the current state of our production environment.
+
+## Release Process
+
+docs-worker-pool contains various triggers for release to higher environments. Currently, the repository supports an integration environment (reflecting the state of the main branch) and a production environment (reflecting the state of the most recent release tag).
+
+### Integration Environment
+
+- Merge a pull request or otherwise push a commit to `main` branch.
+- Verify that the deploy-integration-ec2 workflow has executed successfully.
+
+### Production Environment
+
+- Create release tags. We currently follow [semver](https://semver.org/) standards.
+- If you don't have push access, open an issue or otherwise contact a contributor with administrator privileges.
+- Create a release associated with the tag using the GitHub UI or by running `gh release create`.
+- Verify that the deploy-production-ec2 workflow executed successfully for both job runs across both production instances. The workflow should only run when a release is published.
+
+### Serverless Development
+
+#### Documentation
+
+- [getting started][serverless]
+
+#### Installation
+
+```shell
+npm install -g serverless
+```
+
+#### AWS Config
+
+The serverless framework looks for credentials in `~/.aws/credentials`. So we need to set a profile there in addition to
+`aws sso login`.
+
+```text
+[docs-sls-admin]
+aws_access_key_id=REDACTED
+aws_secret_access_key=REDACTED
+```
+
+#### Deploy Single Function
+
+```shell
+sls deploy function --stage dev --function {FunctionName}
+```
+
+[serverless]: https://www.serverless.com/framework/docs/getting-started
+[snooty-frontend]: https://github.com/mongodb/snooty
