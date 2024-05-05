@@ -7,8 +7,7 @@ aa
 The Docs Worker Pool operates on ECS Fargate. The serverless framework and cloudformation are used to automate
 infrastructure provisioning and management. Going forward, any new buckets should be specified in
 `infrastructure/ecs-main/buckets.yml`
-a
-For specific documentation on the Enhanced Autobuilder, Please visit the [cdk-infra/README.md](cdk-infra/README.md) file.
+aa
 =======
 **A safe home for all your data.**aaaaaaaaaa
 aa
