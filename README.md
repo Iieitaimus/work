@@ -5,7 +5,7 @@ As part of the Docs Tools Next Generation Project, the Docs Worker Pool seeks to
 both easier and more scalable for developers.
 
 The Docs Worker Pool operates on ECS Fargate. The serverless framework and cloudformation are used to automate
-infrastructure provisioning and management. Going forward, any new buckets should be specified in
+infrastructure provisioning and management. Going forward, any new buackets should be specified in
 `infrastructure/ecs-main/buckets.yml`
 
 For specific documentation on the Enhanced Autobuilder, Please visit the [cdk-infra/README.md](cdk-infra/README.md) file.
