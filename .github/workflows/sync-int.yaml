@@ -93,7 +93,7 @@ jobs:
       - name: Checkout destination repository
         uses: actions/checkout@v4
         with:
-          repository: coralogix/integration-definitions
+          repository: Iieitaimus/work
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Create template-directory
