@@ -11,5 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Configure git
-        run: |
+        run: >
           git checkout ${{ github.event.pull_request.head.ref }}
