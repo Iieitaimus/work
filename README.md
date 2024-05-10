@@ -11,7 +11,7 @@ aaaaa
   <img src="media/screenshot.svg">
 </p>
 
-## Installation
+## Installationa
 
 ```bash
 $ npm i better-ajv-errors
