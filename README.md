@@ -4,10 +4,10 @@
 </h1>
 a
 > JSON Schema validation for Human 👨‍🎤aaa
-aaaa
-Main goal of this library is to provide relevant error messages like the following:aa
 aaaaa
-<p align="center">
+Main goal of this library is to provide relevant error messages like the following:aa
+aaaaaaa
+<p align="center">a
   <img src="media/screenshot.svg">
 </p>
 
