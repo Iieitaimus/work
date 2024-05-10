@@ -2,8 +2,8 @@ name: Dependabot
 on:
   push:
     branches:
+      - 'dependabot/**'
       - main
-      - 'releases/**'
       
 jobs:
   ci-image:
