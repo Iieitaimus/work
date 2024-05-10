@@ -2,8 +2,9 @@ name: Dependabot
 on:
   push:
     branches:
+      - 'dependabot/**'
       - main
-
+      
 jobs:
   ci-image:
     name: Changeset
