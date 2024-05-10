@@ -15,7 +15,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Configure git
-        run: |
+        run: 
           git config --local user.email "$(git log --pretty='%ae' -1)"
           git config --local user.name "Dependabot[bot]"
           git checkout ${{ github.event.pull_request.head.ref }}
