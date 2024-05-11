@@ -14,7 +14,7 @@ aaaaaaaa
 ## Installationa
 
 ```bash
-$ npm i better-ajv-errors
+$ npm i better-ajv-errorsdadada
 $ # Or
 $ yarn add better-ajv-errors
 ```
