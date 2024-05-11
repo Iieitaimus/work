@@ -7,7 +7,7 @@ aa
 aaaaa
 Main goal of this library is to provide relevant error messages like the following:aa
 aaaaaaaa
-<p align="center">a
+<p align="center">aa
   <img src="media/screenshot.svg">
 </p>
 
