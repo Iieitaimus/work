@@ -15,7 +15,7 @@ aaaaaaaa
 
 ```bash
 $ npm i better-ajv-errorsdadada
-$ # Or
+$ # Oraaa
 $ yarn add better-ajv-errors
 ```
 
