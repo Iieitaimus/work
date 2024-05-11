@@ -2,7 +2,7 @@
   <img width="570" src="media/logo.png" alt="better-ajv-errors">
   <br>
 </h1>
-a
+aa
 > JSON Schema validation for Human 👨‍🎤aaa
 aaaaaa
 Main goal of this library is to provide relevant error messages like the following:aa
