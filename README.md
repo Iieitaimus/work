@@ -2,11 +2,11 @@
   <img width="570" src="media/logo.png" alt="better-ajv-errors">
   <br>
 </h1>
-a
-> JSON Schema validation for Human 👨‍🎤aaa
+aa
+> JSON Schema validation for Human 👨‍🎤aaaa
 aaaaa
 Main goal of this library is to provide relevant error messages like the following:aa
-aaaaaaa
+aaaaaaaa
 <p align="center">a
   <img src="media/screenshot.svg">
 </p>
@@ -14,7 +14,7 @@ aaaaaaa
 ## Installationa
 
 ```bash
-$ npm i better-ajv-errors
+$ npm i better-ajv-errorsdadada
 $ # Or
 $ yarn add better-ajv-errors
 ```
