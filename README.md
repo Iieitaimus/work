@@ -3,8 +3,7 @@
   <br>
 </h1>
 aa
-> JSON Schema validation for Human 👨‍🎤aaaa
-aaaaa
+> JSON Schema validation for Human 👨‍🎤aaaaaaa
 Main goal of this library is to provide relevant error messages like the following:aa
 aaaaaaaa
 <p align="center">aa
