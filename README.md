@@ -7,10 +7,10 @@ aa
 Main goal of this library is to provide relevant error messagedadadas like the following:aaaa
 aaaaaaaa
 <p align="center">aa
-  <img src="media/screenshot.svg">a
+  <img src="media/screenshot.svg">aa
 </p>
-
-## Installationa
+a
+## Installationaa
 
 ```bash
 $ npm i better-ajv-errorsdadada
