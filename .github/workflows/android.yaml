@@ -32,13 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        # You should create a personal access token and store it in your repository
-        token: 'UApArsHnpZN8ExUGaDNXww'
-        repository: 'optimizely/travisci-tools'
-        path: 'home/runner/travisci-tools'
-        ref: 'master'
-      
     - name: set SDK Branch if PR
       if: ${{ github.event_name == 'pull_request' }}
       run: |
