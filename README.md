@@ -6,7 +6,7 @@ aa
 > JSON Schema validation for Human 👨‍🎤aaaaaaa
 Main goal of this library is to provide relevant error messagedadadas like the following:aaaa
 aaaaaaaa
-<p align="center">aa
+<p align="center">aaa
   <img src="media/screenshot.svg">aaa
 </p>
 a
