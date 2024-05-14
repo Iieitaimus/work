@@ -89,13 +89,7 @@ jobs:
     if: "${{ needs.upload_files.outputs.has_file_from_the_list_changed != 'false' }}"
     needs: upload_files
     steps:
-
-      - name: Checkout destination repository
-        uses: actions/checkout@v4
-        with:
-          repository: coralogix/integration-definitions
-          token: ${{ secrets.GH_TOKEN }}
-
+    
       - name: Create template-directory
         run: mkdir ./template-directory
 
