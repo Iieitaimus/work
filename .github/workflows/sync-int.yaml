@@ -89,34 +89,6 @@ jobs:
     if: "${{ needs.upload_files.outputs.has_file_from_the_list_changed != 'false' }}"
     needs: upload_files
     steps:
-    
-      - name: Create template-directory
-        run: mkdir ./template-directory
-
-      - name: Download template-directory
-        uses: actions/download-artifact@v4
-        with:
-          name: template-directory
-          path: ./template-directory
-    
-      - name: Download replace_template file
-        uses: actions/download-artifact@v4
-        with:
-          name: replace_template
-          path: ./
-          
-      - name: Download custom_lambda_code file
-        uses: actions/download-artifact@v4
-        with:
-          name: custom_lambda_code
-          path: ./
-
-      - name: Download changed-integration file
-        uses: actions/download-artifact@v4
-        with:
-          name: changed-integration
-          path: ./
-
       - name: apply changes to the files
         run: |
           branch_name="sync-CloudFormation-branch-$(date +"%m-%d-%H-%M")"
