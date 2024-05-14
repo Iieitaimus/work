@@ -9,7 +9,7 @@ aaaaaaaa
 <p align="center">aaa
   <img src="media/screenshot.svg">aaa
 </p>
-a
+aa
 ## Installationaa
 
 ```bash
