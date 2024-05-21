@@ -1,0 +1,12 @@
+name: Block merges for EOL
+
+on: pull_request
+
+
+jobs:
+  block-merges-eol:
+    name: Test
+    runs-on: ubuntu-latest-low
+    steps:
+      - name: Test
+        run: echo "${{ github.ref_name }}"" | echo ${{ github.head_ref  }}"
