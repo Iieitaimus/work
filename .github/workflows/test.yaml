@@ -6,7 +6,8 @@ on: pull_request
 jobs:
   block-merges-eol:
     name: Test
-    runs-on: ubuntu-latest-low
+    runs-on: "ubuntu-latest"
     steps:
-      - name: Test
-        run: echo "${{ github.ref_name }}"" | echo ${{ github.head_ref  }}"
+      - name: "Test"
+        run: |
+          echo "${{ github.ref_name }}"" | echo ${{ github.head_ref  }}"
