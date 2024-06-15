@@ -2,8 +2,6 @@ on:
   pull_request:
     branches:
       - main
-    types:
-      - closed
 
 name: Cleanup Feature Branch Infrastructure
 jobs: 
