@@ -15,7 +15,7 @@ declare(strict_types=1);
  * @author Christoph Wurst <christoph@winzerhof-wurst.at>
  * @author Côme Chilliet <come.chilliet@nextcloud.com>
  * @author Damjan Georgievski <gdamjan@gmail.com>
- * @author Daniel Kesselberg <mail@danielkesselberg.de>
+ * @author Daniel Kesselberg <mail@danielkesselberg.de>a
  * @author davidgumberg <davidnoizgumberg@gmail.com>
  * @author Eric Masseran <rico.masseran@gmail.com>
  * @author Florin Peter <github@florin-peter.de>
