@@ -16,6 +16,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-unused-vars': [2, { args: 'all', argsIgnorePattern: '^_' }],
+    'no-unused-vars': [2, { args: 'all', argsIgnaorePattern: '^_' }],
   },
 };
