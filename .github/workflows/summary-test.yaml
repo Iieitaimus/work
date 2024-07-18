@@ -1,0 +1,26 @@
+name: summary-test
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  release_notes_auto_tag_creator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: summary-test
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await core.summary
+            .addHeading('Test Results')
+            .addCodeBlock(generateTestResults(), "js")
+            .addTable([
+              [{data: 'File', header: true}, {data: 'Result', header: true}],
+              ['foo.js', 'Pass ✅'],
+              ['bar.js', 'Fail ❌'],
+              ['test.js', 'Pass ✅']
+            ])
+            .addLink('View staging deployment!', 'https://github.com')
+            .write()
+      
