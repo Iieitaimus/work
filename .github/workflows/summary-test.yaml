@@ -1,0 +1,18 @@
+name: summary-test
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  release_notes_auto_tag_creator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: summary-test
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.info('Creating a comment on the issue/pr')
+            core.debug(JSON.stringify(context, null, 2))
+            core.info('Successfully Commented on the issue')
+            core.summary.addLink('Comment Created!', "https://github.com/a")
