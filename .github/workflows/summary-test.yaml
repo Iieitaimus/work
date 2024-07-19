@@ -12,15 +12,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            await core.summary
-            .addHeading('Test Results')
-            .addCodeBlock(generateTestResults(), "js")
-            .addTable([
-              [{data: 'File', header: true}, {data: 'Result', header: true}],
-              ['foo.js', 'Pass ✅'],
-              ['bar.js', 'Fail ❌'],
-              ['test.js', 'Pass ✅']
-            ])
-            .addLink('View staging deployment!', 'https://github.com')
-            .write()
-      
+            core.info('Creating a comment on the issue/pr')
+            core.debug(JSON.stringify(context, null, 2))
+            core.info('Successfully Commented on the issue')
+            core.summary.addLink('Comment Created!', "https://github.com/a")
