@@ -15,4 +15,10 @@ jobs:
             core.info('Creating a comment on the issue/pr')
             core.debug(JSON.stringify(context, null, 2))
             core.info('Successfully Commented on the issue')
+            const comment = await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '${{ inputs.message }}'
+            })
             core.summary.addLink('Comment Created!', "https://github.com/a")
