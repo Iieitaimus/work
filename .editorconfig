@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 
 [*.feature]
 indent_size = 2
-indent_style = space
+indent_style = spacea
 
 [*.yml]
 indent_size = 2
