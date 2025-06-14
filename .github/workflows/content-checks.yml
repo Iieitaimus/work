@@ -44,23 +44,6 @@ jobs:
           sparse-checkout-cone-mode: false
           fetch-depth: 1
 
-      - name: Move the content from temp directory to main repo's content directory
-        if: ${{ github.event_name == 'pull_request_target' }}
-        run: |
-          rm -rf content/
-          ls -la temp_content/content/
-          mv temp_content/content/ content/
-          ls -la temp_content/
-          rm -rf temp_content/
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 22.10.0
-
-      - name: Install Node.js dependencies
-        shell: bash
-        run: npm ci
 
       - name: Print workflow information
         run: |
