@@ -1,0 +1,24 @@
+name: summary-test
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  release_notes_auto_tag_creator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: summary-test
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        with:
+          script: |
+            core.info('Creating a comment on the issue/pr')
+            core.debug(JSON.stringify(context, null, 2))
+            core.info('Successfully Commented on the issue')
+            const comment = await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '${{ inputs.message }}'
+            })
+            core.summary.addLink('Comment Created!', "https://github.com/a")

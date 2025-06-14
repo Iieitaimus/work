@@ -12,7 +12,7 @@ RUN npm run build
 RUN cd ./modules/persistence \
     && npm ci --legacy-peer-deps \
     && npm run build
-
+aaa
 # Build modules
 # OAS Page Builder
 RUN cd ./modules/oas-page-builder \
