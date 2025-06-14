@@ -1,0 +1,22 @@
+name: Content Checks
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow information
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Pull request number: ${{ github.event.pull_request.number }}"
+          echo "Pull request user login: ${{ github.event.pull_request.user.login }}"
+          echo "Base (target) ref: ${{ github.event.pull_request.base.ref }}"
+          echo "Base (target) sha: ${{ github.event.pull_request.base.sha }}"
+          echo "Head (source) ref: ${{ github.event.pull_request.head.ref }}"
+          echo "Head (source) sha: ${{ github.event.pull_request.head.sha }}"
+          git status
+          git remote -v
+          git log --oneline -n 10
